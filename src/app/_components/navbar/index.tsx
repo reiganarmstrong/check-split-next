@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import Coffee from "@/../public/coffee.svg";
+import CoffeeLarge from "@/../public/coffee-large.svg";
+import Logo from "@/../public/logo.svg";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import Coffee from "@/lib/assets/coffee.svg";
-import CoffeeLarge from "@/lib/assets/coffee-large.svg";
-import Logo from "@/lib/assets/logo.svg";
 export default () => {
   return (
     <NavigationMenu className="pt-10 pb-14 w-full">

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Receipt from "../lib/assets/receipt.svg";
+import Receipt from "@/../public/receipt.svg";
 import Intro from "./_components/intro";
 
 export default function Home() {
