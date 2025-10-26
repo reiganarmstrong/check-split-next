@@ -10,16 +10,19 @@ export const middleware = async (request: NextRequest) => {
   let session: AuthSession | undefined;
   try {
     session = await fetchAuthSession();
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
 
   // If the user is trying to access a protected route and is not authenticated, redirect to login
   if (session?.credentials === undefined) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
+
   // Allow the request to proceed if no redirection is needed
   return NextResponse.next();
 };
 
 export const config = {
-  matcher: "/home",
+  matcher: ["/home"],
 };
