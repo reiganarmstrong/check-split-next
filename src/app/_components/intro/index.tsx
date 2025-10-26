@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 export default () => {
   return (
@@ -10,14 +11,14 @@ export default () => {
           Skip the Napkin Math
         </h2>
       </div>
-      <form className="flex justify-center items-center">
+      <div className="flex flex-col w-full items-center">
         <Button
-          className="text-2xl p-8 shadow-lg shadow-brand cursor-pointer"
-          type="submit"
+          className="text-2xl p-8 shadow-lg shadow-brand cursor-pointer max-w-sm"
+          type="button"
         >
-          Get Started Now
+          <Link href={"/home"}>Get Started Now</Link>
         </Button>
-      </form>
+      </div>
     </div>
   );
 };
