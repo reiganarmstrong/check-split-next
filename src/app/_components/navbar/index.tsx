@@ -17,7 +17,7 @@ export default () => {
           <NavigationMenuLink asChild>
             <Link href="/" className="">
               <div className="flex flex-row justify-center items-center text-3xl gap-2">
-                <Image src={Logo} alt="logo" className="h-10 w-10" />
+                <Image src={Logo} alt="logo" className="h-10 w-10" priority />
                 <h1 className="font-medium underline decoration-3 decoration-pink-500">
                   CheckSplit
                 </h1>
@@ -36,6 +36,7 @@ export default () => {
                 src={CoffeeLarge}
                 alt="coffee-large"
                 className="h-9 w-45"
+                priority
               />
             </Link>
           </NavigationMenuLink>
@@ -46,7 +47,7 @@ export default () => {
             className="dark bg-background text-foreground"
           >
             <Link href="/">
-              <Image src={Coffee} alt="coffee" className="h-9 w-9" />
+              <Image src={Coffee} alt="coffee" className="h-9 w-9" priority />
             </Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
