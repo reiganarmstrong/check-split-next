@@ -12,12 +12,14 @@ export default () => {
         </h2>
       </div>
       <div className="flex flex-col w-full items-center">
-        <Button
-          className="text-2xl p-8 shadow-lg shadow-brand cursor-pointer max-w-sm"
-          type="button"
-        >
-          <Link href={"/home"}>Get Started Now</Link>
-        </Button>
+        <Link href={"/home"}>
+          <Button
+            className="text-2xl p-8 shadow-lg shadow-brand cursor-pointer max-w-sm"
+            type="button"
+          >
+            Get Started Now
+          </Button>
+        </Link>
       </div>
     </div>
   );
