@@ -4,7 +4,7 @@ import useCredentials from "@/hooks/use-credentials";
 export default () => {
   const userInfo = useCredentials();
   if (userInfo === null) {
-    return <div className="w-full h-full" />;
+    return null;
   }
 
   return (
