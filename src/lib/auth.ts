@@ -1,6 +1,6 @@
-import type { ResourcesConfig } from "aws-amplify";
+import { Amplify, type ResourcesConfig } from "aws-amplify";
 
-export const authConfig: ResourcesConfig["Auth"] = {
+const authConfig: ResourcesConfig["Auth"] = {
   Cognito: {
     userPoolId: process.env.NEXT_PUBLIC_USER_POOL_ID ?? "",
     userPoolClientId: process.env.NEXT_PUBLIC_CLIENT_ID ?? "",
@@ -23,6 +23,8 @@ export const authConfig: ResourcesConfig["Auth"] = {
   },
 };
 
-export const ssrConfig = {
-  ssr: true,
+export const configureAuth = () => {
+  Amplify.configure({
+    Auth: authConfig,
+  });
 };
