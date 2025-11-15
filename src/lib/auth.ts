@@ -1,4 +1,5 @@
 import { Amplify, type ResourcesConfig } from "aws-amplify";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 const authConfig: ResourcesConfig["Auth"] = {
   Cognito: {
@@ -27,4 +28,14 @@ export const configureAuth = () => {
   Amplify.configure({
     Auth: authConfig,
   });
+};
+
+export const getCurrentTokens = async () => {
+  try {
+    const { tokens } = await fetchAuthSession({ forceRefresh: true });
+    return tokens;
+  } catch (error) {
+    console.log("Error fetching auth session tokens:", error);
+    return null;
+  }
 };
