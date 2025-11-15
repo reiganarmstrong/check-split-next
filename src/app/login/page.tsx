@@ -1,5 +1,7 @@
 "use client";
 
 export default () => {
-  return <div>login</div>;
+  return (
+    <div className="w-full h-full flex justify-center items-center">login</div>
+  );
 };
