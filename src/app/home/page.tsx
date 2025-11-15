@@ -1,21 +1,15 @@
 "use client";
-import { getCurrentUser } from "aws-amplify/auth";
-import { useEffect } from "react";
+import useCredentials from "@/hooks/use-credentials";
 
 export default () => {
-  useEffect(() => {
-    const getCredentials = async () => {
-      try {
-        const { username, userId, signInDetails } = await getCurrentUser();
-        console.log(username);
-        console.log(userId);
-        console.log(signInDetails);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getCredentials();
-  }, []);
+  const userInfo = useCredentials();
+  if (userInfo === null) {
+    return <div className="w-full h-full" />;
+  }
 
-  return <div>home</div>;
+  return (
+    <div className="w-full h-full flex justify-center items-center flex-row">
+      <div>Welcome, {userInfo?.username}</div>
+    </div>
+  );
 };
