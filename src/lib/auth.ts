@@ -56,7 +56,7 @@ export const getUserTokens = async () => {
 
 // fetches authenticated user info, returns null if not authenticated
 export const getAuthenticatedUserInfo = async (): Promise<UserInfo> => {
-  const tokens = getUserTokens();
+  const tokens = await getUserTokens();
   if (!tokens) {
     return null;
   }

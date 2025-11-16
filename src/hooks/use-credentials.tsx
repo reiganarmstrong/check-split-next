@@ -6,7 +6,6 @@ export default () => {
   const [userInfo, setUserInfo] = useState<UserInfo>(null);
   const router = useRouter();
   useEffect(() => {
-    // Simulate an authentication check
     const getUserInfo = async () => {
       const details = await getAuthenticatedUserInfo();
       if (details === null) {
