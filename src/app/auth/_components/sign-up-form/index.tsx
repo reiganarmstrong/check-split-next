@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
 import { useAppForm } from "@/hooks/use-app-form";
@@ -8,8 +9,8 @@ import {
   type SignUpFormData,
   signUpFormSchema,
 } from "./_types/sign-up-form-data";
-
 export default () => {
+  const router = useRouter();
   const form = useAppForm({
     defaultValues: {
       email: "",
@@ -26,12 +27,13 @@ export default () => {
           return {
             formErrors: [{ message: result }],
           };
+        } else {
+          console.log("Sign up successful:", result);
+          router.push("/auth/verify-email");
         }
       },
     },
-    onSubmit: () => {
-      console.log("Form submitted");
-    },
+    onSubmit: () => {},
   });
 
   return (
@@ -44,7 +46,7 @@ export default () => {
         className="min-w-[250px] sm:min-w-sm"
       >
         <FieldSet>
-          <FieldLegend className="w-full text-center">Verify Email</FieldLegend>
+          <FieldLegend className="w-full text-center">Sign Up</FieldLegend>
           <FieldGroup>
             <form.AppField name="email">
               {(field) => {

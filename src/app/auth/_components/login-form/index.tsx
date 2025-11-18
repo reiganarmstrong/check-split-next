@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
 import { useAppForm } from "@/hooks/use-app-form";
@@ -7,6 +8,7 @@ import { loginUser } from "@/lib/auth";
 import { type LoginFormData, loginFormSchema } from "./_types/login-form-data";
 
 export default () => {
+  const router = useRouter();
   const form = useAppForm({
     defaultValues: {
       email: "",
@@ -24,11 +26,10 @@ export default () => {
           };
         } else if (
           res.isSignedIn === false &&
-          res.nextStep.signInStep !== "CONFIRM_SIGN_UP"
+          res.nextStep.signInStep === "CONFIRM_SIGN_UP"
         ) {
-          return {
-            formErrors: [{ message: "" }],
-          };
+          router.push("/auth/verify-email");
+        } else {
         }
       },
     },

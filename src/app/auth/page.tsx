@@ -1,12 +1,13 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import FormContainer from "./_components/form-container";
 import LoginForm from "./_components/login-form";
 import SignUpForm from "./_components/sign-up-form";
 
 export default () => {
   return (
-    <div className="w-full h-full flex justify-center items-start pt-10">
+    <FormContainer>
       <Tabs defaultValue="login">
         <TabsList className="justify-center w-full">
           <TabsTrigger value="login">Login</TabsTrigger>
@@ -19,6 +20,6 @@ export default () => {
           <SignUpForm />
         </TabsContent>
       </Tabs>
-    </div>
+    </FormContainer>
   );
 };

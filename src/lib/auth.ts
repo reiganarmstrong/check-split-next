@@ -1,6 +1,8 @@
 "use client";
 import { Amplify, type ResourcesConfig } from "aws-amplify";
 import {
+  type ConfirmSignUpOutput,
+  confirmSignUp,
   fetchAuthSession,
   getCurrentUser,
   type SignInOutput,
@@ -9,7 +11,7 @@ import {
 } from "aws-amplify/auth";
 import type { LoginFormData } from "@/app/auth/_components/login-form/_types/login-form-data";
 import type { SignUpFormData } from "@/app/auth/_components/sign-up-form/_types/sign-up-form-data";
-import type { VerifyEmailFormData } from "@/app/auth/_components/verify-email-form/_types/verify-email-form-data";
+import type { VerifyEmailFormData } from "@/app/auth/verify-email/_components/verify-email-form/_types/verify-email-form-data";
 
 // Auth configuration for AWS cognito
 const authConfig: ResourcesConfig["Auth"] = {
@@ -132,4 +134,18 @@ export const loginUser = async ({ email, password }: LoginFormData) => {
   }
 };
 
-export const verifyEmail = async ({ email, code }: VerifyEmailFormData) => {};
+export const verifyEmail = async ({ email, code }: VerifyEmailFormData) => {
+  try {
+    const res: ConfirmSignUpOutput = await confirmSignUp({
+      username: email,
+      confirmationCode: code,
+    });
+    return res;
+  } catch (error: unknown) {
+    console.log("Error verifying email:", error);
+    return (
+      (error as Error)?.message ??
+      "Internal error occurred during email verification, please try again later"
+    );
+  }
+};

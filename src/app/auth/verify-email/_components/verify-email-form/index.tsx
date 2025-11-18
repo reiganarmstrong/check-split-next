@@ -19,12 +19,23 @@ export default () => {
       onChange: verifyEmailFormSchema,
       onSubmitAsync: async ({ value }) => {
         console.log(value);
-        const result = await verifyEmail(value);
-        if (typeof result === "string") {
-          console.log("Verify email error:", result);
+        const res = await verifyEmail(value);
+        if (typeof res === "string") {
+          console.log("Verify email error:", res);
           return {
-            formErrors: [{ message: result }],
+            formErrors: [{ message: res }],
           };
+        } else if (!res.isSignUpComplete) {
+          return {
+            formErrors: [
+              {
+                message:
+                  "Internal error occurred during email verification, please try again later",
+              },
+            ],
+          };
+        } else {
+          console.log("Email verified successfully");
         }
       },
     },
