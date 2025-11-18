@@ -112,6 +112,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --brand-hover: oklch(0.6233 0.1994 281.19);
+  --brand: oklch(0.5533 0.1994 281.19);
 }
 
 @layer base {

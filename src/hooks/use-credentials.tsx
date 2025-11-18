@@ -9,7 +9,7 @@ export default () => {
     const getUserInfo = async () => {
       const details = await getAuthenticatedUserInfo();
       if (details === null) {
-        router.push("/login");
+        router.replace("/auth");
       }
       setUserInfo(details);
     };

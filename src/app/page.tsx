@@ -6,7 +6,8 @@ export default function Home() {
   return (
     <div className="flex flex-row h-full">
       <Intro />
-      <div className="w-1/2 justify-center items-start hidden md:flex">
+      <div className="justify-center w-1/2 items-center hidden md:flex">
+        {/* <div className=""> */}
         <Image
           src={Receipt}
           alt="receipt"
