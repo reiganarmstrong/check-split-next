@@ -4,7 +4,11 @@ import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
 import { useAppForm } from "@/hooks/use-app-form";
-import { signUpUser } from "@/lib/auth";
+import {
+  type SignUpSuccessStatus,
+  signUpSuccessStatuses,
+  signUpUser,
+} from "@/lib/auth/sign-up";
 import {
   type SignUpFormData,
   signUpFormSchema,
@@ -21,15 +25,13 @@ export default () => {
       onChange: signUpFormSchema,
       onSubmitAsync: async ({ value }) => {
         console.log(value);
-        const result = await signUpUser(value);
-        if (typeof result === "string") {
-          console.log("Sign up error:", result);
-          return {
-            formErrors: [{ message: result }],
-          };
-        } else {
-          console.log("Sign up successful:", result);
+        const res = await signUpUser(value);
+        if (signUpSuccessStatuses.includes(res as SignUpSuccessStatus)) {
           router.push("/auth/verify-email");
+        } else {
+          return {
+            formErrors: [{ message: res }],
+          };
         }
       },
     },

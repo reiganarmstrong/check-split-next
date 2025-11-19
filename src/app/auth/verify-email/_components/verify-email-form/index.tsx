@@ -1,15 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { FieldGroup, FieldLegend, FieldSet } from "@/components/ui/field";
 import { useAppForm } from "@/hooks/use-app-form";
-import { verifyEmail } from "@/lib/auth";
+import {
+  autoLogin,
+  type VerifyEmailSuccessStatus,
+  verifyEmail,
+  verifyEmailSuccessStatuses,
+} from "@/lib/auth/verify-email";
 import {
   type VerifyEmailFormData,
   verifyEmailFormSchema,
 } from "./_types/verify-email-form-data";
 
 export default () => {
+  const router = useRouter();
   const form = useAppForm({
     defaultValues: {
       email: "",
@@ -19,23 +26,23 @@ export default () => {
       onChange: verifyEmailFormSchema,
       onSubmitAsync: async ({ value }) => {
         console.log(value);
-        const res = await verifyEmail(value);
-        if (typeof res === "string") {
+        const res: VerifyEmailSuccessStatus | string = await verifyEmail(value);
+        if (
+          verifyEmailSuccessStatuses.includes(res as VerifyEmailSuccessStatus)
+        ) {
+          if (res === "DONE") {
+            // TODO: login manually
+            router.push("/home");
+          } else {
+            // TODO: auto login
+            autoLogin();
+            router.push("/home");
+          }
+        } else {
           console.log("Verify email error:", res);
           return {
             formErrors: [{ message: res }],
           };
-        } else if (!res.isSignUpComplete) {
-          return {
-            formErrors: [
-              {
-                message:
-                  "Internal error occurred during email verification, please try again later",
-              },
-            ],
-          };
-        } else {
-          console.log("Email verified successfully");
         }
       },
     },

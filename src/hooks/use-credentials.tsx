@@ -1,7 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getAuthenticatedUserInfo, type UserInfo } from "@/lib/auth";
+import {
+  getAuthenticatedUserInfo,
+  type UserInfo,
+} from "@/lib/auth/credentials";
+
 export default () => {
   const [userInfo, setUserInfo] = useState<UserInfo>(null);
   const router = useRouter();
